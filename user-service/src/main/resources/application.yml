@@ -1,0 +1,31 @@
+server:
+  port: 8082
+# DataSource Config
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql:///srdemo?userUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#      discovery:
+#        cluster-name: HZ
+  application:
+    name: user-service
+    cloud:
+      nacos:
+        server-addr: localhost:8848 # nacos服务地址
+    #      discovery: #设置地域，作用有两个，一是提高容灾能力，二是加快访问速度
+    #      cluster-name: HZ
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.ggy: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+feign:
+  httpclient:
+    enabled: true # 支持HttpClient的开关
+    max-connections: 200 # 最大连接数
+    max-connections-per-route: 50 # 单个路径的最大连接数
