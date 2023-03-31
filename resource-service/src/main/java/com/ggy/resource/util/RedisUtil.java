@@ -1,7 +1,8 @@
 package com.ggy.resource.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -163,6 +164,18 @@ public class RedisUtil {
      */
     public Object hget(String key,String item){
         return redisTemplate.opsForHash().get(key, item);
+    }
+    /*** 
+     *   匹配获取键值对
+     *   ScanOptions.NONE为获取全部键对
+     *   ScanOptions.scanOptions().match(“map1”).build()，匹配获取键位map1的键值对,不能模糊匹配
+     * @author GaoGuiYun
+     * @date 2023-03-31 13:18
+     * @param
+     * @return 
+     */
+    public Cursor<Map.Entry<Object, Object>> hscan(String key, ScanOptions value){
+        return redisTemplate.opsForHash().scan(key, value);
     }
 
     /**

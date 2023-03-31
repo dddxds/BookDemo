@@ -43,6 +43,7 @@ public class ResourceService {
         resource.setCreatedTime(LocalDateTime.now());
         resource.setModifyTime(LocalDateTime.now());
         resource.setStatus(1l);
+        userClient.uploadResource(resource.getCreateUserId());
 
         return resourceMapper.insert(resource);
     }

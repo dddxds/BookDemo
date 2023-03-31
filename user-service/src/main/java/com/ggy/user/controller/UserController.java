@@ -21,11 +21,11 @@ public class UserController {
      * 获取用户信息 然后将用户的上传数加一
      */
     @RequestMapping("/uploadresource")
-    public int uploadResource(int status){
-       // int i=0;
+    public int uploadResource(Long status){
+        int i=0;
 //        if (status!=0){
 //           userService
 //        }
-        return status;
+        return i;
     }
 }

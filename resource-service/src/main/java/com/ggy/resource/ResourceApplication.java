@@ -7,12 +7,14 @@ import com.ggy.fegin.UserClient;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 @MapperScan("com.ggy.resource.mapper")
 @SpringBootApplication
 @EnableFeignClients(clients = UserClient.class,defaultConfiguration = DefaultFeignConfiguration.class)
+@EnableCaching
 public class ResourceApplication {
 
     public static void main(String[] args) {
