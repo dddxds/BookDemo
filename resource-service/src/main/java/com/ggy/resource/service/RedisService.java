@@ -35,9 +35,9 @@ public class RedisService {
      * @param likedUserId
      * @param likedPostId
      */
-    public void saveLiked2Redis(String likedUserId, String likedPostId) {
+    public boolean saveLiked2Redis(String likedUserId, String likedPostId) {
         String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId);
-        redisUtil.hset(RedisKeyUtils.MAP_KEY_USER_LIKED, key, LikedStatusEnum.LIKE.getCode());
+        return redisUtil.hset(RedisKeyUtils.MAP_KEY_USER_LIKED, key, LikedStatusEnum.LIKE.getCode());
 
     }
     /**

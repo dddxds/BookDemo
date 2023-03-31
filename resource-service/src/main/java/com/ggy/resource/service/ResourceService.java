@@ -30,6 +30,10 @@ public class ResourceService {
     private HistoryMapper historyMapper;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private LikedService likedService;
+    @Autowired
+    private RedisService redisService;
 
     @Autowired
     private UserClient userClient;
@@ -84,9 +88,10 @@ public class ResourceService {
         history.setResourceId(resource.getId());
         return historyMapper.insert(history);
     }
-    //先创建一个该字段  未创建
-    public int upResource(Resource resource) {
-        long incr = redisUtil.incr(String.valueOf(resource.getId()), 1);
-        return Math.toIntExact(incr);
+    //获取这个数组 点赞id 被点赞id 类型 状态
+    public boolean upResource(String [] resource) {
+        //之后再弄细分
+
+        return redisService.saveLiked2Redis(resource[0], resource[1]);
     }
 }

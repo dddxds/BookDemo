@@ -141,17 +141,17 @@ public class ResourceController {
 
     };
 
-    //对评论点赞   应该只获取数量与评论id的  不过暂且这样
-    @RequestMapping(value = "/up",method = RequestMethod.POST)
-    public AjaxResult upComment(@RequestBody Comment comment){
-        int i=commentService.upComment(comment);
-
-        if (i!=0){
-            return Result.success();
-        }else {
-            return Result.error();
-        }
-    };
+//    //对评论点赞   应该只获取数量与评论id的  不过暂且这样
+//    @RequestMapping(value = "/up",method = RequestMethod.POST)
+//    public AjaxResult upComment(@RequestBody Comment comment){
+//        int i=commentService.upComment(comment);
+//
+//        if (i!=0){
+//            return Result.success();
+//        }else {
+//            return Result.error();
+//        }
+//    };
 
     //收藏资源  用户信息与资源信息
     @RequestMapping(value = "/collect" ,method = RequestMethod.POST)
@@ -175,10 +175,10 @@ public class ResourceController {
     };
     //对资源点赞
     @RequestMapping(value = "/up",method = RequestMethod.POST)
-    public AjaxResult upResource(@RequestBody Resource resource){
-
-        int i=resourceService.upResource(resource);
-        if (i!=0){
+    public AjaxResult upResource(@RequestParam String msg){
+        String [] msgs=msg.split("::");
+        
+        if (resourceService.upResource(msgs)){
             return Result.success();
         }else {
             return Result.error();

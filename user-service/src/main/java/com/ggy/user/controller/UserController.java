@@ -6,9 +6,9 @@ import com.ggy.config.Result;
 import com.ggy.pojo.User;
 import com.ggy.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -41,4 +41,45 @@ public class UserController {
             return Result.error();
         }
     }
+
+    //通过id查询用户
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public AjaxResult findById(@PathVariable("id") long id){
+        User byId = userService.findById(id);
+        if(byId!=null){
+            return Result.success(byId);
+        }else {
+            return Result.error();
+        }
+    };
+    //获取所有用户
+    @RequestMapping(value = "/findall",method = RequestMethod.GET)
+    public AjaxResult findAllUser(){
+        List<User> all = userService.findAll();
+        if(all!=null){
+            return Result.success(all);
+        }else {
+            return Result.error();
+        }
+
+    };
+    //注册
+    @RequestMapping(value = "/registration",method = RequestMethod.POST)
+    public AjaxResult registration(@RequestBody User user){
+       if(userService.registration(user)) {
+           return Result.success();
+       }else {
+           return Result.error();
+       }
+    };
+
+    //注销
+    @RequestMapping(value = "/del",method = RequestMethod.DELETE)
+    AjaxResult delUser(@PathVariable("id") Long id){
+        if(userService.del(id)){
+            return Result.success();
+        }else {
+            return Result.error();
+        }
+    };
 }

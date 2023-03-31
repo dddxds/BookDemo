@@ -6,6 +6,8 @@ import com.ggy.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -18,5 +20,31 @@ public class UserService {
         }else {
             return false;
         }
+    }
+
+    public boolean del(Long id) {
+        int i=userMapper.deleteById(id);
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean registration(User user) {
+        int i=userMapper.insert(user);
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public List<User> findAll() {
+        return userMapper.selectList(null);
+    }
+
+    public User findById(long id) {
+        return userMapper.selectById(String.valueOf(id));
     }
 }
