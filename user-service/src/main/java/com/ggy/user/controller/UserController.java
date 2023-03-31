@@ -1,9 +1,13 @@
 package com.ggy.user.controller;
 
 
+import com.ggy.config.AjaxResult;
+import com.ggy.config.Result;
+import com.ggy.pojo.User;
 import com.ggy.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,5 +31,14 @@ public class UserController {
 //           userService
 //        }
         return i;
+    }
+
+    @RequestMapping(value = "/updateuserlike",method = RequestMethod.POST)
+    public AjaxResult updateLike(User user){
+        if (userService.updateUser(user)){
+            return Result.success();
+        }else {
+            return Result.error();
+        }
     }
 }
