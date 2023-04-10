@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql:///srdemo?userUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql:///srdemo?userUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
 #      discovery:
 #        cluster-name: HZ
@@ -18,7 +18,7 @@ spring:
     #      cluster-name: HZ
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: false
 logging:
   level:
     com.ggy: debug

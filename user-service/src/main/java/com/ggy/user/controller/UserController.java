@@ -25,12 +25,12 @@ public class UserController {
      * 获取用户信息 然后将用户的上传数加一
      */
     @RequestMapping("/uploadresource")
-    public int uploadResource(Long status){
+    public AjaxResult uploadResource(Long status){
         int i=0;
 //        if (status!=0){
 //           userService
 //        }
-        return i;
+        return Result.success();
     }
 
     @RequestMapping(value = "/updateuserlike",method = RequestMethod.POST)
@@ -66,7 +66,9 @@ public class UserController {
     //注册
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
     public AjaxResult registration(@RequestBody User user){
+        System.out.println(user);
        if(userService.registration(user)) {
+
            return Result.success();
        }else {
            return Result.error();

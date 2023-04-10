@@ -1,5 +1,7 @@
 package com.ggy.resource.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ggy.config.AjaxResult;
 import com.ggy.config.Result;
 import com.ggy.pojo.Comment;
@@ -85,6 +87,25 @@ public class ResourceController {
 
 
     };
+    //获取资源列表 后期做分页查询  根据各种条件返回
+    @RequestMapping(value = "/getresourcespage",method = RequestMethod.POST)
+    public AjaxResult findResourcesByPage(@RequestBody String s){
+        s=s.replace("\"", "");
+        System.out.println("这个字符串的值为"+s);
+        //字符串格式 页码::类型::排序方式::升序降序
+        String[] slist=s.split("::");
+        Page<Resource> objectPage = new Page<>(Long.valueOf(slist[0]),20);
+        IPage<Resource> resources = resourceService.FindResourceByPage(objectPage,slist);
+
+        resources.getRecords().forEach(System.out::println);
+        if(resources!=null){
+            return Result.success(resources);
+        }else {
+            return Result.error();
+        }
+
+
+    };
 
     //获取某个人发布的资源
     @RequestMapping(value = "/getbyuser/{id}",method = RequestMethod.GET)
@@ -98,9 +119,10 @@ public class ResourceController {
     };
 
     //获取某类资源
-    @RequestMapping(value = "/getbytype/{type}",method = RequestMethod.GET)
-    public AjaxResult findResourcesByType(@PathVariable("type")Long id) {
-        List<Resource> resources = resourceService.FindByType(id);
+    @RequestMapping(value = "/getbytype",method = RequestMethod.POST)
+    public AjaxResult findResourcesByType(@RequestBody String type) {
+
+        List<Resource> resources = resourceService.FindByType(type.replace("\"", "") );
         if(resources!=null){
             return Result.success(resources);
         }else {
@@ -176,6 +198,7 @@ public class ResourceController {
     //对资源点赞
     @RequestMapping(value = "/up",method = RequestMethod.POST)
     public AjaxResult upResource(@RequestParam String msg){
+        msg=msg.replace("\"", "");
         String [] msgs=msg.split("::");
         
         if (resourceService.upResource(msgs)){

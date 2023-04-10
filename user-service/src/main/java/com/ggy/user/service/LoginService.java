@@ -14,12 +14,18 @@ public class LoginService {
     UserMapper userMapper;
 
     public AjaxResult Login(User user){
-        User user1 = userMapper.selectOne(new QueryWrapper<User>().eq("uName",user.getUName()));
-
-        if(user1.getUPwd()==user.getUPwd()){
+        User user1 = userMapper.selectOne(new QueryWrapper<User>().eq("uNumber",user.getUNumber()));
+        boolean equals = false;
+        if (user1!=null){
+        equals = user1.getUPwd().equals(user.getUPwd());
+        if(equals){
             return Result.success();
+
         }else {
-            return Result.error();
+            return Result.error("账号或密码错误");
     }
+    }else{
+        return Result.error("账号或密码错误");
     }
+}
 }

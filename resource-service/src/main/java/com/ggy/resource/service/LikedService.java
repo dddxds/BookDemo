@@ -118,8 +118,8 @@ public class LikedService {
             User user = (User) userClient.findById(dto.getId()).getData();
             //点赞数量属于无关紧要的操作，出错无需抛异常
             if (user != null){
-            Long likeNum = user.getLike() + dto.getCount();
-            user.setLike(likeNum);
+            Long likeNum = user.getUlike() + dto.getCount();
+            user.setUlike(likeNum);
             //更新点赞数量
             userClient.updateInfo(user);
         }

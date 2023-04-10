@@ -1,5 +1,6 @@
 package com.ggy.resource;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ggy.pojo.Resource;
 import com.ggy.resource.mapper.ResourceMapper;
 import com.ggy.resource.service.ResourceService;
@@ -8,12 +9,12 @@ import com.ggy.resource.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -48,7 +49,16 @@ class ResourceserviceApplicationTests {
     @Test
     public void text1(){
 //        System.out.println(resourceMapper.selectById(1l));
-        System.out.println(resourceService.FindById(1l));
+//        System.out.println(resourceService.FindById(1l));
+//        System.out.println(resourceService.FindByType("人文历史"));
+//        System.out.println(resourceService.TestFindAll();
+//        Page<Resource> objects = new Page<>(4, 2);
+//        IPage iPage = resourceService.TestFindAll(objects);
+//        System.out.println("ipage:"+iPage);
+//        iPage.getRecords().forEach(System.out::println);
+
+
+
 
     }
    /***

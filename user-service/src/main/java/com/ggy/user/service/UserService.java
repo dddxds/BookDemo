@@ -6,6 +6,7 @@ import com.ggy.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,6 +33,11 @@ public class UserService {
     }
 
     public boolean registration(User user) {
+        user.setCreatedTime(LocalDateTime.now());
+        user.setCreatedUser("admin");
+        user.setModifyUser("admin");
+        user.setModifyTime(LocalDateTime.now());
+
         int i=userMapper.insert(user);
         if(i!=0){
             return true;
