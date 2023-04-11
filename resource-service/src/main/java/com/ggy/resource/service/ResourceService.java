@@ -54,8 +54,18 @@ public class ResourceService {
 
         return resourceMapper.insert(resource);
     }
-
+     /***
+      *   删除需要联动删除，其他表比如评论表，点赞，发布数量等
+      *   收藏表直接删除  其他的改状态码
+      * @author GaoGuiYun
+      * @date 2023-04-11 15:42
+      * @param
+      * @return
+      */
     public int DeleteResource(Long id) {
+
+
+
         return resourceMapper.deleteById(id);
     }
 
@@ -69,7 +79,7 @@ public class ResourceService {
         //对S进行处理
 
         LambdaQueryWrapper<Resource> objectLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if (s[1] != null) {
+        if (!s[1].equals("") ) {
             if (s[2].equals("time")) {
                 objectLambdaQueryWrapper.orderBy(true, Boolean.parseBoolean(s[3]), Resource::getCreatedTime).eq(Resource::getResourceClass, s[1]);
             } else if (s[2].equals("like")) {
@@ -92,6 +102,7 @@ public class ResourceService {
     }
 
     public int UpdateResource(Resource resource) {
+        resource.setModifyTime(LocalDateTime.now());
         return resourceMapper.update(resource, null);
     }
 

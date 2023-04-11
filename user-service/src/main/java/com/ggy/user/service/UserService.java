@@ -1,6 +1,9 @@
 package com.ggy.user.service;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.ggy.pojo.User;
 import com.ggy.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +17,21 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public boolean updateUser(User user){
-        int i=userMapper.updateById(user);
-        if(i!=0){
+    public boolean updateUser(User user) {
+        user.setModifyTime(LocalDateTime.now());
+        int i = userMapper.updateById(user);
+        if (i != 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
     public boolean del(Long id) {
-        int i=userMapper.deleteById(id);
-        if(i!=0){
+        int i = userMapper.deleteById(id);
+        if (i != 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -37,11 +41,13 @@ public class UserService {
         user.setCreatedUser("admin");
         user.setModifyUser("admin");
         user.setModifyTime(LocalDateTime.now());
-
-        int i=userMapper.insert(user);
-        if(i!=0){
+        if (user.getPicture() == null) {
+            user.setPicture("@/assets/logo.png");
+        }
+        int i = userMapper.insert(user);
+        if (i != 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -51,6 +57,13 @@ public class UserService {
     }
 
     public User findById(long id) {
-        return userMapper.selectById(String.valueOf(id));
+        return userMapper.selectById(id);
+    }
+
+    public int uploadResource(Long id) {
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+
+        userUpdateWrapper.setSql("'upload'='upload'+1").eq("id",id);
+        return userMapper.update(null,userUpdateWrapper);
     }
 }

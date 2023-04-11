@@ -25,16 +25,17 @@ public class UserController {
      * 获取用户信息 然后将用户的上传数加一
      */
     @RequestMapping("/uploadresource")
-    public AjaxResult uploadResource(Long status){
+    public AjaxResult uploadResource(@PathVariable("id") Long id){
         int i=0;
 //        if (status!=0){
 //           userService
 //        }
+        userService.uploadResource(id);
         return Result.success();
     }
 
     @RequestMapping(value = "/updateuserlike",method = RequestMethod.POST)
-    public AjaxResult updateLike(User user){
+    public AjaxResult updateLike(@RequestBody User user){
         if (userService.updateUser(user)){
             return Result.success();
         }else {
@@ -44,7 +45,7 @@ public class UserController {
 
     //通过id查询用户
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public AjaxResult findById(@PathVariable("id") long id){
+    public AjaxResult findById(@PathVariable("id") Long id){
         User byId = userService.findById(id);
         if(byId!=null){
             return Result.success(byId);

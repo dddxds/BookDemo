@@ -30,8 +30,8 @@ public class CommentService {
 
     public List<Comment> getComments(Long id) {
 
-        return commentMapper.selectList(new QueryWrapper<Comment>().eq("resourceId",String.valueOf(id)));
-
+    // return commentMapper.selectList(new QueryWrapper<Comment>().eq("resourceId",String.valueOf(id)));
+       return commentMapper.selectList(new QueryWrapper<Comment>().eq("resourceId",id));
     }
 
     public int addComment(Comment comment) {

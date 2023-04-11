@@ -1,8 +1,11 @@
 package com.ggy.resource;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.ggy.fegin.UserClient;
+import com.ggy.pojo.Comment;
 import com.ggy.pojo.Resource;
 import com.ggy.resource.mapper.ResourceMapper;
+import com.ggy.resource.service.CommentService;
 import com.ggy.resource.service.ResourceService;
 
 import com.ggy.resource.util.RedisUtil;
@@ -25,8 +28,12 @@ class ResourceserviceApplicationTests {
     private ResourceService resourceService;
     @Autowired
     private RedisUtil redisUtil;
-   @Autowired
-   private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private UserClient userClient;
+    @Autowired
+    private CommentService commentService;
 
 
 
@@ -35,6 +42,36 @@ class ResourceserviceApplicationTests {
     @Test
     void contextLoads() {
     }
+
+    /***
+     * 向数据库插入各种数据
+     */
+    @Test
+    void insert(){
+
+//        List<Resource> resources = resourceService.FindAll();
+//        resources.forEach(resource -> {
+//            Comment comment = new Comment();
+//            comment.setResourceId(resource.getId());
+//            comment.setContent("啥也不说了，楼主就是给力！");
+//            comment.setReceiverId(1L);
+//            comment.setUlike(0L);
+//            comment.setCreatedUser("曲德宏");
+//            comment.setCreatedTime(LocalDateTime.now());
+//            comment.setModifyUser("曲德宏");
+//            comment.setModifyTime(LocalDateTime.now());
+//            comment.setStatus(1l);
+//            commentService.addComment(comment);
+//        });
+
+
+
+
+
+
+    }
+
+
     @Test
     void text2(){
         //测试redis数据库
@@ -56,7 +93,7 @@ class ResourceserviceApplicationTests {
 //        IPage iPage = resourceService.TestFindAll(objects);
 //        System.out.println("ipage:"+iPage);
 //        iPage.getRecords().forEach(System.out::println);
-
+        System.out.println(commentService.getComments(1623255820957040642l));
 
 
 
