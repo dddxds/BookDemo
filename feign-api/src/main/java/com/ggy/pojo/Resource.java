@@ -23,5 +23,6 @@ public class Resource extends BaseEntity{
     private String resourceClass;
     private String introduce;
     private Long ulike;
+    private Integer see;
 
 }

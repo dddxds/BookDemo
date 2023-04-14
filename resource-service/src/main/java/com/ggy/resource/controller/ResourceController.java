@@ -4,13 +4,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ggy.config.AjaxResult;
 import com.ggy.config.Result;
+import com.ggy.fegin.UserClient;
 import com.ggy.pojo.Comment;
 import com.ggy.pojo.Resource;
+import com.ggy.pojo.User;
 import com.ggy.resource.service.CommentService;
 import com.ggy.resource.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -58,7 +61,6 @@ public class ResourceController {
         else {
             return Result.error();
         }
-
 
     };
 
@@ -136,7 +138,10 @@ public class ResourceController {
     //获取资源下评论
     @RequestMapping(value = "/getcomments/{id}",method = RequestMethod.GET)
     public AjaxResult getComments(@PathVariable("id")Long id){
-        List<Comment> comments=commentService.getComments(id);
+        HashMap<Object, Object> comments=commentService.getComments(id);
+        comments.forEach((key,value)->{
+            System.out.println(key.toString()+value.toString());
+        });
 
 
         if (comments!=null){

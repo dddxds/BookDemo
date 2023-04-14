@@ -6,6 +6,7 @@ import com.ggy.pojo.Comment;
 import com.ggy.pojo.Resource;
 import com.ggy.resource.mapper.ResourceMapper;
 import com.ggy.resource.service.CommentService;
+import com.ggy.resource.service.RedisService;
 import com.ggy.resource.service.ResourceService;
 
 import com.ggy.resource.util.RedisUtil;
@@ -34,6 +35,9 @@ class ResourceserviceApplicationTests {
     private UserClient userClient;
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private RedisService redisService;
 
 
 
@@ -75,12 +79,12 @@ class ResourceserviceApplicationTests {
     @Test
     void text2(){
         //测试redis数据库
-        System.out.println(redisUtil.set("t1","22222"));
-        System.out.println(redisUtil.get("t1"));
+//        System.out.println(redisUtil.set("t1","22222"));
+//        System.out.println(redisUtil.get("t1"));
 //        stringRedisTemplate.opsForValue().set("t1","2222");
 //        System.out.println("--------------");
 //        System.out.println(stringRedisTemplate.opsForValue().get("t1"));
-
+        System.out.println(redisService.saveLiked2Redis("1","1644207729066844161"));
     }
 
     @Test

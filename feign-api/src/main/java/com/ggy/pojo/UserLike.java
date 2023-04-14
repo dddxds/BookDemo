@@ -1,5 +1,7 @@
 package com.ggy.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.Id;
  ***/
 @Entity
 @Data
+@TableName("t_user_like")
 public class UserLike {
     //主键id
     @Id
@@ -21,9 +24,11 @@ public class UserLike {
     private Integer id;
 
     //被点赞的用户的id
+    @TableField("liked_user_id")
     private String likedUserId;
 
     //点赞的用户的id
+    @TableField("liked_post_id")
     private String likedPostId;
 
     //点赞的状态.默认未点赞

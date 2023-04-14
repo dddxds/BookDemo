@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-@FeignClient(value="userservice",path = "/user")
+@FeignClient(value="user-service",path = "/user")
 public interface UserClient{
     //通过id查询用户
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)

@@ -4,6 +4,7 @@ package com.ggy.user.controller;
 import com.ggy.config.AjaxResult;
 import com.ggy.config.Result;
 import com.ggy.pojo.User;
+import com.ggy.user.service.LoginService;
 import com.ggy.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,20 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    LoginService loginService;
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public AjaxResult Login(@RequestBody User user){
+//        System.out.println(user.toString());
+        return loginService.Login(user);
+    }
 
     /***
      *
      * @author GaoGuiYun
      * @date 2023/2/7 15:37
-     * @param status
+     * @param id
      * @return int
      * 获取用户信息 然后将用户的上传数加一
      */
@@ -43,10 +52,11 @@ public class UserController {
         }
     }
 
-    //通过id查询用户
+    //通过id查询用户  评论用
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public AjaxResult findById(@PathVariable("id") Long id){
         User byId = userService.findById(id);
+        byId.setUPwd("");
         if(byId!=null){
             return Result.success(byId);
         }else {

@@ -1,4 +1,4 @@
-package com.ggy.user.util;
+package com.ggy.gateway.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -9,14 +9,12 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /***
  *  @title: JwtUtil
  *  @author: GaoGuiYun
  *  @version: 1.0.0
- *  @create: 2023-04-12 10:57
+ *  @create: 2023-04-12 15:56
  ***/
 public class JwtUtil {
     //有效期为
@@ -26,9 +24,6 @@ public class JwtUtil {
     public static final String JWT_KEY = "GaoGuiYun";
 
     public static String createJWT(String id, String subject, Long ttlMillis) {
-//        Map<String, Object> header = new HashMap<String, Object>();
-//		header.put("typ", "JWT");
-//		header.put("alg", "HS256");
         //指定算法
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -51,7 +46,6 @@ public class JwtUtil {
 
         //封装Jwt令牌信息
         JwtBuilder builder = Jwts.builder()
-//                .setHeader(header)
                 .setId(id)                    //唯一的ID
                 .setSubject(subject)          // 主题  可以是JSON数据
                 .setIssuer("admin")          // 签发者

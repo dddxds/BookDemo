@@ -3,6 +3,7 @@ package com.ggy.user.service;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ggy.config.AjaxResult;
+import com.ggy.config.HttpStatus;
 import com.ggy.config.Result;
 import com.ggy.pojo.User;
 import com.ggy.user.mapper.UserMapper;
@@ -30,7 +31,8 @@ public class LoginService {
                 info.put("username",user1.getId());
                 info.put("role","ROLE_ADMIN");
                 String token = JwtUtil.createJWT(UUID.randomUUID().toString(), JSON.toJSONString(info), null);
-                return Result.success(token);
+                user1.setUPwd("");
+                return Result.success(200,token,user1);
             } else {
                 return Result.error("账号或密码错误");
             }
