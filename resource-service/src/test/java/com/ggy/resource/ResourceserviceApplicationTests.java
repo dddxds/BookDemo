@@ -84,7 +84,7 @@ class ResourceserviceApplicationTests {
 //        stringRedisTemplate.opsForValue().set("t1","2222");
 //        System.out.println("--------------");
 //        System.out.println(stringRedisTemplate.opsForValue().get("t1"));
-        System.out.println(redisService.saveLiked2Redis("1","1644207729066844161"));
+//        System.out.println(redisService.saveLiked2Redis("1","1644207729066844161"));
     }
 
     @Test

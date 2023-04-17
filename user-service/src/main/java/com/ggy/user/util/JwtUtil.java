@@ -20,7 +20,7 @@ import java.util.Map;
  ***/
 public class JwtUtil {
     //有效期为
-    public static final Long JWT_TTL = 3600000L;// 60 * 60 *1000  一个小时
+    public static final Long JWT_TTL = 36000000L;// 60 * 60 *1000  一个小时 10小时
 
     //Jwt令牌信息
     public static final String JWT_KEY = "GaoGuiYun";

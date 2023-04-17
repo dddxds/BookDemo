@@ -72,11 +72,12 @@
             </dependency>
 
 
-            <dependency>
-                <groupId>com.ggy</groupId>
-                <artifactId>feign-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
+
+        <dependency>
+            <groupId>com.ggy</groupId>
+            <artifactId>feign-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!--鉴权-->
         <dependency>

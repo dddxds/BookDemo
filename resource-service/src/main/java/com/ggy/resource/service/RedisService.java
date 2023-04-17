@@ -35,8 +35,8 @@ public class RedisService {
      * @param likedUserId
      * @param likedPostId
      */
-    public boolean saveLiked2Redis(String likedUserId, String likedPostId) {
-        String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId);
+    public boolean saveLiked2Redis(String likedUserId, String likedPostId,String likeObjId,String type) {
+        String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId,likeObjId,type);
         return redisUtil.hset(RedisKeyUtils.MAP_KEY_USER_LIKED, key, LikedStatusEnum.LIKE.getCode());
 
     }
@@ -45,9 +45,9 @@ public class RedisService {
      * @param likedUserId
      * @param likedPostId
      */
-    public void unlikeFromRedis(String likedUserId, String likedPostId) {
-        String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId);
-        redisUtil.hset(RedisKeyUtils.MAP_KEY_USER_LIKED, key, LikedStatusEnum.UNLIKE.getCode());
+    public boolean unlikeFromRedis(String likedUserId, String likedPostId,String likeObjId,String type) {
+        String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId,likeObjId,type);
+       return redisUtil.hset(RedisKeyUtils.MAP_KEY_USER_LIKED, key, LikedStatusEnum.UNLIKE.getCode());
 
     }
     /**
@@ -56,8 +56,8 @@ public class RedisService {
      * @param likedPostId
      */
 
-    public void deleteLikedFromRedis(String likedUserId, String likedPostId) {
-        String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId);
+    public void deleteLikedFromRedis(String likedUserId, String likedPostId,String likeObjId,String type) {
+        String key = RedisKeyUtils.getLikedKey(likedUserId, likedPostId,likeObjId,type);
         redisUtil.hdel(RedisKeyUtils.MAP_KEY_USER_LIKED, key);
     }
     /**
@@ -90,12 +90,14 @@ public class RedisService {
             String[] split = key.split("::");
             String likedUserId = split[0];
             String likedPostId = split[1];
+            String likedObjId = split[2];
+            Integer type = Integer.valueOf(split[3]);
             Integer value = (Integer) entry.getValue();
 
             //组装成 UserLike 对象
-            UserLike userLike = new UserLike(likedUserId, likedPostId, value);
+            UserLike userLike = new UserLike(likedUserId, likedPostId, value,likedObjId,type);
             list.add(userLike);
-
+            System.out.println("已获取redis中的所有点赞数据");
             //存到 list 后从 Redis 中删除
             redisUtil.hdel(RedisKeyUtils.MAP_KEY_USER_LIKED, key);
 

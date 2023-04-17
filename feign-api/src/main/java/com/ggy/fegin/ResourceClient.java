@@ -66,6 +66,8 @@ public interface ResourceClient{
     public AjaxResult upResource(@RequestBody String msg);
     @RequestMapping(value = "/getresourcespage",method = RequestMethod.POST)
     public AjaxResult findResourcesByPage(@RequestBody String s);
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public AjaxResult SearchResource(@RequestParam String msg);
 
 
 

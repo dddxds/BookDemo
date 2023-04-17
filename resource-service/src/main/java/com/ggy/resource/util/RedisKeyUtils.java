@@ -18,11 +18,15 @@ public class RedisKeyUtils {
      * @param likedPostId 点赞的人的id
      * @return
      */
-    public static String getLikedKey(String likedUserId, String likedPostId){
+    public static String getLikedKey(String likedUserId, String likedPostId,String likeObjId,String type){
         StringBuilder builder = new StringBuilder();
         builder.append(likedUserId);
         builder.append("::");
         builder.append(likedPostId);
+        builder.append("::");
+        builder.append(likeObjId);
+        builder.append("::");
+        builder.append(type);
         return builder.toString();
     }
 }

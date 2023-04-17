@@ -115,7 +115,7 @@ public class LikedService {
     public void transLikedCountFromRedis2DB() {
         List<LikedCountDTO> list = redisService.getLikedCountFromRedis();
         for (LikedCountDTO dto : list) {
-            User user = (User) userClient.findById(dto.getId()).getData();
+            User user = (User) userClient.findById(Long.valueOf(dto.getId())).getData();
             //点赞数量属于无关紧要的操作，出错无需抛异常
             if (user != null){
             Long likeNum = user.getUlike() + dto.getCount();
